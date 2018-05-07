@@ -55,7 +55,7 @@ module.exports = {
     hints: false,
   },
   devtool: "inline-cheap-module-source-map",
-  externals: [nodeExternals()],
+  // externals: [nodeExternals()],
 };
 
 if (process.env.NODE_ENV === "production") {
