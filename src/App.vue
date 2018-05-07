@@ -1,13 +1,15 @@
 <template>
   <div id="app">
     <navbar :title="title"/>
-    <allPhotos :photos="photos"/>
+    <allPhotos v-if="currentView === 'AllPhotos'" :photos="photos" v-on:show-single-photo="showSinglePhoto"/>
+    <singlePhoto v-if="currentView === 'SinglePhoto'" :photo="photo" />
   </div>
 </template>
 
 <script>
 import Navbar from "./Navbar";
 import AllPhotos from "./AllPhotos";
+import SinglePhoto from "./SinglePhoto";
 import { listObjects, getSingleObject } from "../utils/index";
 
 export default {
@@ -15,6 +17,7 @@ export default {
   components: {
     navbar: Navbar,
     allPhotos: AllPhotos,
+    singlePhoto: SinglePhoto,
   },
   data: () => ({
     title: "Photo Upload App",
@@ -30,6 +33,13 @@ export default {
       .then((photos) => {
         this.photos = photos;
       });
+  },
+  methods: {
+    showSinglePhoto: function(photo) {
+      console.log("It worked");
+      this.currentView = "SinglePhoto";
+      this.selectedPhoto = photo;
+    },
   },
 };
 </script>
