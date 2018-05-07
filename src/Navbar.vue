@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{ title }}</h1>
+    <h1 v-on:click="$emit('showAllPhotos')">{{ title }}</h1>
     <upload />
   </div>
 </template>
@@ -18,4 +18,7 @@ export default {
 </script>
 
 <style>
+h1 {
+  cursor: pointer;
+}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <navbar :title="title"/>
+    <navbar :title="title" v-on:showAllPhotos="showAllPhotos"/>
     <allPhotos v-if="currentView === 'AllPhotos'" :photos="photos" v-on:show-single-photo="showSinglePhoto"/>
     <singlePhoto v-if="currentView === 'SinglePhoto'" :photo="selectedPhoto" />
   </div>
@@ -39,6 +39,9 @@ export default {
       // console.log("It worked");
       this.currentView = "SinglePhoto";
       this.selectedPhoto = photo;
+    },
+    showAllPhotos: function() {
+      this.currentView = "AllPhotos";
     },
   },
 };

@@ -2,10 +2,8 @@
   <div id="all-photos">
     <div v-for="(photo,index) in photos" v-bind:key="index" class="image-cell" v-on:click="$emit('show-single-photo',photo)" >
       <img class="image" :src="`data:image/jpeg;base64, ${photo}`"  />
-      
-    </div>
- 
-  </div>
+      </div>
+ </div>
 </template>
 
 <script>
