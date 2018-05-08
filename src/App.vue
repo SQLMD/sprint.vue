@@ -45,13 +45,16 @@ export default {
       this.currentView = "AllPhotos";
     },
     loadPhotos() {
-      listObjects()
-        .then((data) =>
-          Promise.all(data.map((item) => getSingleObject(item.Key)))
-        )
-        .then((photos) => {
-          this.photos = photos;
+      listObjects().then((data) => {
+        const loadedPhotos = Array(data.length).fill("");
+        this.photos = loadedPhotos.slice();
+        data.forEach((item, index) => {
+          getSingleObject(item.Key).then((photo) => {
+            loadedPhotos[index] = photo;
+            this.photos = loadedPhotos.slice();
+          });
         });
+      });
     },
   },
 };
