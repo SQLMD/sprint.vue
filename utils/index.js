@@ -1,7 +1,7 @@
 /* global AWS */
 const bucketName = "react.sprint";
 const identityPoolId = "ap-northeast-1:131db146-e5b9-4f7b-8b58-d0c59e2deeaf";
-
+import AWS from "aws-sdk";
 // students: ap-northeast-1:131db146-e5b9-4f7b-8b58-d0c59e2deeaf
 AWS.config.update({
   region: "ap-northeast-1",
