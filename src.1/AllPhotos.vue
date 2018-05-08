@@ -4,7 +4,7 @@
       v-for="(photo,index) in photos" 
       :key="index" 
       class="image-cell" 
-      @click="()=>showSinglePhoto(photo)" >
+      @click="$emit('show-single-photo',photo)" >
       <img 
         class="image" 
         :src="`data:image/jpeg;base64, ${photo}`" >
@@ -13,25 +13,9 @@
 </template>
 
 <script>
-import Store from "./store/store";
-import { mapState } from "vuex";
-
 export default {
   name: "AllPhotos",
-  store: Store,
-  methods: {
-    showSinglePhoto(photo) {
-      Store.dispatch({
-        type: "showSinglePhoto",
-        photo,
-      });
-    },
-  },
-  computed: mapState({
-    photos: function(state) {
-      return state.photos;
-    },
-  }),
+  props: ["photos"],
 };
 </script>
 

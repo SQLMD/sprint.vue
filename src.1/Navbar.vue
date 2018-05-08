@@ -2,33 +2,25 @@
   <div id="navbar">
     <h1 
       id="navbar-header" 
-      @click="showAllPhotos">{{ title }}</h1>
-    <upload />
+      @click="$emit('showAllPhotos')">{{ title }}</h1>
+    <upload @load-photos="loadPhotos"/>
   </div>
 </template>
 
 <script>
 import Upload from "./Upload";
-import Store from "./store/store";
-import { mapState } from "vuex";
 
 export default {
   name: "Navbar",
   components: {
     upload: Upload,
   },
+  props: ["title"],
   methods: {
-    showAllPhotos(photo) {
-      Store.dispatch({
-        type: "showAllPhotos",
-      });
+    loadPhotos() {
+      this.$emit("load-photos");
     },
   },
-  computed: mapState({
-    title: function(state) {
-      return state.title;
-    },
-  }),
 };
 </script>
 

@@ -11,18 +11,15 @@
 
 <script>
 import { saveObject } from "../utils/index";
-import Store from "./store/store";
 export default {
   name: "Upload",
+  data: () => ({
+    file: undefined,
+  }),
   methods: {
     uploadPhoto(photo) {
       saveObject(photo).then(() => {
-        this.loadPhotos();
-      });
-    },
-    loadPhotos() {
-      Store.dispatch({
-        type: "loadPhotos",
+        this.$emit("load-photos");
       });
     },
     selectFile() {

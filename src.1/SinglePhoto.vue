@@ -2,22 +2,15 @@
   <div id="single-photo">
     <img 
       class = "single-image" 
-      :src="`data:image/jpeg;base64, ${selectedPhoto}`" 
+      :src="`data:image/jpeg;base64, ${photo}`" 
       alt="Photo">
   </div>
 </template>
 
 <script>
-import Store from "./store/store";
-import { mapState } from "vuex";
-
 export default {
   name: "SinglePhoto",
-  computed: mapState({
-    selectedPhoto: function(state) {
-      return state.selectedPhoto;
-    },
-  }),
+  props: ["photo"],
 };
 </script>
 
