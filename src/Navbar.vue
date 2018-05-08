@@ -1,7 +1,9 @@
 <template>
   <div id="navbar">
-    <h1 id="navbar-header" v-on:click="$emit('showAllPhotos')">{{ title }}</h1>
-    <upload />
+    <h1 
+      id="navbar-header" 
+      @click="$emit('showAllPhotos')">{{ title }}</h1>
+    <upload @load-photos="loadPhotos"/>
   </div>
 </template>
 
@@ -14,6 +16,11 @@ export default {
     upload: Upload,
   },
   props: ["title"],
+  methods: {
+    loadPhotos() {
+      this.$emit("load-photos");
+    },
+  },
 };
 </script>
 

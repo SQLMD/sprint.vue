@@ -1,8 +1,16 @@
 <template>
   <div id="app">
-    <navbar :title="title" v-on:showAllPhotos="showAllPhotos"/>
-    <allPhotos v-if="currentView === 'AllPhotos'" :photos="photos" v-on:show-single-photo="showSinglePhoto"/>
-    <singlePhoto v-if="currentView === 'SinglePhoto'" :photo="selectedPhoto" />
+    <navbar 
+      :title="title" 
+      @showAllPhotos="showAllPhotos"
+      @load-photos="loadPhotos"/>
+    <allPhotos 
+      v-if="currentView === 'AllPhotos'" 
+      :photos="photos" 
+      @show-single-photo="showSinglePhoto"/>
+    <singlePhoto 
+      v-if="currentView === 'SinglePhoto'" 
+      :photo="selectedPhoto" />
   </div>
 </template>
 
@@ -21,27 +29,29 @@ export default {
   },
   data: () => ({
     title: "Photo Upload App",
-    photos: [1, 2, 3, 4],
+    photos: [],
     currentView: "AllPhotos",
     selectedPhoto: undefined,
   }),
-  created: function() {
-    listObjects()
-      .then((data) =>
-        Promise.all(data.map((item) => getSingleObject(item.Key)))
-      )
-      .then((photos) => {
-        this.photos = photos;
-      });
+  created() {
+    this.loadPhotos();
   },
   methods: {
-    showSinglePhoto: function(photo) {
-      // console.log("It worked");
+    showSinglePhoto(photo) {
       this.currentView = "SinglePhoto";
       this.selectedPhoto = photo;
     },
-    showAllPhotos: function() {
+    showAllPhotos() {
       this.currentView = "AllPhotos";
+    },
+    loadPhotos() {
+      listObjects()
+        .then((data) =>
+          Promise.all(data.map((item) => getSingleObject(item.Key)))
+        )
+        .then((photos) => {
+          this.photos = photos;
+        });
     },
   },
 };

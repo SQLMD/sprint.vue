@@ -1,9 +1,11 @@
 <template>
   <div>
-    <input type="file" ref="myFile"
-    v-on:change="(e)=>{uploadPhoto(e.target.files[0])}"
-    />
-    <button v-on:click="(e)=>{selectFile()}">Upload Photo</button>
+    <input 
+      type="file" 
+      ref="myFile"
+      @change="(e)=>{uploadPhoto(e.target.files[0])}"
+    >
+    <button @click="(e)=>{selectFile()}">Upload Photo</button>
   </div>
 </template>
 
@@ -15,9 +17,10 @@ export default {
     file: undefined,
   }),
   methods: {
-    uploadPhoto: function(photo) {
-      // saveObject(photo);
-      console.log(photo);
+    uploadPhoto(photo) {
+      saveObject(photo).then(() => {
+        this.$emit("load-photos");
+      });
     },
     selectFile() {
       this.file = this.$refs.myFile.click();

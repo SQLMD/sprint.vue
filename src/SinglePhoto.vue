@@ -1,6 +1,9 @@
 <template>
   <div id="single-photo">
-    <img class = "single-image" :src="`data:image/jpeg;base64, ${photo}`" alt="Photo">
+    <img 
+      class = "single-image" 
+      :src="`data:image/jpeg;base64, ${photo}`" 
+      alt="Photo">
   </div>
 </template>
 
